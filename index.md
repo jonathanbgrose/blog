@@ -63,8 +63,10 @@ READ RECORD FROM FILE,ID ELSE RECORD=''
 One of the precious few things I truly enjoy about PICK programming for MVDBs more than SQL DBs is beautiful simplicity in the use of the `WRITE` command. Today we call it `UPSERT`. It still troubles me that SQL systems can't take a page out of a very old book, and create a meaningfully simple syntax for an `UPSERT` command. 
 
 ```
-"BUT WAIT!" the SQL nerd in you is screaming. "You CAN do an `UPSERT` in SQL! It is [very well documented](https://www.mssqltips.com/sqlservertip/1704/using-merge-in-sql-server-to-insert-update-and-delete-at-the-same-time/). [Every SQL implementation has some version of it](https://blog.usejournal.com/update-insert-upsert-multiple-records-in-different-db-types-63aa44191884), and since you have MS SQL Server just use [`MERGE`](https://docs.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql?view=sql-server-ver15), it's basically everywhere now and soooo easy:"
+"BUT WAIT!" the SQL nerd in you is screaming. "You CAN do an `UPSERT` in SQL!"
 ```
+"It is [very well documented](https://www.mssqltips.com/sqlservertip/1704/using-merge-in-sql-server-to-insert-update-and-delete-at-the-same-time/). [Every SQL implementation has some version of it](https://blog.usejournal.com/update-insert-upsert-multiple-records-in-different-db-types-63aa44191884), and since you have MS SQL Server just use [`MERGE`](https://docs.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql?view=sql-server-ver15), it's basically everywhere now and soooo easy:"
+
 ```
 MERGE <target_table> [AS TARGET]
 USING <table_source> [AS SOURCE]
