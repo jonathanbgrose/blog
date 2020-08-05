@@ -87,11 +87,11 @@ The other thing that can be frustrating is that the syntax of these `UPSERT`s ar
 
 Look, you're not all together wrong. Yes, I can, but it doesn't seem like I should have to. I want all the complicated options for when I need them, but for much of my code I don't need them. Sometimes you get the feeling that SQL was written for SQL developers, not the "normal people" like me. Forced complexity forces more choices, which are taxing on the *developer*, and that complexity can spill over into other layers of the application stack. This is accepted that the developer has to make this choice over and over again. 
  
- - The [HTTP](https://tools.ietf.org/html/rfc2616#section-9.5) does this with `POST` vs `PUT`. Do you want to make a new one, or update it? Don't know, well better do a `GET` to find out first, then tell me. Web frameworks accept the paradigm and you often have to make different controllers/routes for different HTTP verbs that do ALMOST the same thing, and probably share most of the same code.
+ - [HTTP](https://tools.ietf.org/html/rfc2616#section-9.5) does this with `POST` vs `PUT`. Do you want to make a new one, or update it? Don't know, well better do a `GET` to find out first, then tell me. Web frameworks accept the paradigm and you often have to make different controllers/routes for different HTTP verbs that do ALMOST the same thing, and probably share most of the same code.
  
  - ORMs try to overcome this in variety of ways by hiding even more complex code interactions, but ultimately require the developer to decide what to do in each case of an [`INSERT` or `UPDATE`.](https://stackoverflow.com/questions/41724658/how-to-do-a-proper-upsert-using-sqlalchemy-on-postgresql)
  
- ## NO SQL for you!
+## NO SQL for you!
  
 ```"Just ditch SQL and do No-SQL if you've got so many problems."```
 
