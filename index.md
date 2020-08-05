@@ -65,7 +65,7 @@ One of the precious few things I truly enjoy about PICK programming for MVDBs mo
 
 ```"BUT WAIT!" the SQL nerd in you is screaming. "You can do an `UPSERT` in SQL. It is very well documented. Every SQL has some version of it, and If you have SQL Server just use `MERGE`, it's basically everywhere now and soooo easy:"
 
-
+```
 MERGE <target_table> [AS TARGET]
 USING <table_source> [AS SOURCE]
 ON <search_condition>
