@@ -105,7 +105,7 @@ Ultimately this comes down to issues of abstractions. Every time we create struc
 
 OK, put on your imagination hat with me. What if SQL stopped trying to be so agnostic, and created a more explicit `UPSERT` syntax that didn't require so many decision points? If you have a single table, which has at least one primary key with `UNIQUE`, and you just want to `UPSERT` one (or more) rows, then you don't need to create an `IF/ELSE` structure. You just do like the cave dwelling engineers who built our mainframes did, you just do a `WRITE` and walk away.
 
-This could look look identical to an insert:
+This could look identical to an insert:
 
 ```
 UPSERT INTO table(col1,col2,col3)
