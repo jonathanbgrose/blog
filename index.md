@@ -63,8 +63,7 @@ READ RECORD FROM FILE,ID ELSE RECORD=''
 
 One of the precious few things I truly enjoy about PICK programming for MVDBs more than SQL DBs is the use of the `WRITE` command. Today we would call it `UPSERT`. It still troubles me that SQL systems can't take a page out of a very old book, and create a meaningfully simple syntax for an `UPSERT` command. 
 
-```"BUT WAIT!" the SQL nerd in you is screaming. "You can do an `UPSERT` in SQL. It is very well documented. Every SQL has some version of it, and If you have SQL Server just use `MERGE`, it's basically everywhere now and soooo easy:"
-
+```"BUT WAIT!" the SQL nerd in you is screaming. "You can do an `UPSERT` in SQL. It is very well documented. Every SQL has some version of it, and If you have SQL Server just use `MERGE`, it's basically everywhere now and soooo easy:"```
 ```
 MERGE <target_table> [AS TARGET]
 USING <table_source> [AS SOURCE]
