@@ -1,13 +1,13 @@
 
 ## Old things, Bold things, Oft' untold things
 
-I've been working with Multi-Value Database Systems (MVDB) for long enough that I have opinions about it. For example: If you are building a new application, and think "Oh, that 40 year old database looks like it would be pretty handy!" then just say "no", and google a little harder. If you need a back-end then use SQL, or No-SQL, or SQL-Lite running on a ten year old iPhone, just anything else. Alas, it is unlikely we will be rid of this relic antime soon, since it is so prohibitvely costly to move off legacy systems. And there is nothing wrong with appreciating something old, especially if it is continuing to deliver value.
+I've been working with [Multi-Value Database Systems](https://en.wikipedia.org/wiki/Rocket_U2) (MVDB) for just long enough that I feel entitled to opinions. For example: If you are building a new application, and think "Oh, that 40+ year old database looks like it would be pretty handy!" then just say "no", and google a little harder. If you need a back-end then use SQL, or No-SQL, or SQL-Lite running on a ten year old iPhone, just anything else. Alas, it is unlikely we will be rid of this relic antime soon, since it is so prohibitvely costly to move off legacy systems. And there is nothing wrong with appreciating something old, especially if it is continuing to deliver value.
 
-Principles of good design haven't radically changed in 2 generations of developers. I would argue that thoughtful design was even more critical in older systems, as they had to work within extreme hardware and software constraints. We have more 3rd party libraries, a faster internet, and cheaper silicon to cover up flaws in our thinking. This idea extends beyond even computers, as we have had information storage and retreival systems since the first writing of non-verbal human history. The principles of the system tend to matter more than just the medium you use (scroll, tablet, magnetic tapes, Azure SQL Server, etc.).
+Many principles of good design haven't radically changed in 2 generations of developers. I would argue that thoughtful design was even more critical in older systems, as they had to work within extreme hardware and software constraints. We have more 3rd party libraries, a faster internet, and cheaper silicon to cover up our flaws. This idea extends beyond even computers, as we have had information storage and retreival systems since the first writing of non-verbal human history. The principles of the system tend to matter more than just the medium you use (scroll, clay tablet, magnetic tapes, Azure SQL Server, etc.).
 
 ## Ask me no questions, I'll udpate no files
 
-Let's do a thought experiment. You have a form to drop off at an office. You approach the desk, hand the form to the smiling office manager and ask them to process it for you. They open up a drawer with a folder, find the spot with your name, and see that something is already there, the old form that had your OLD address and needs to be updated. 
+Let's do a thought experiment. (FUN!) You have a form to drop off at an office. You approach the desk, hand the form to the smiling office manager and ask them to process it for you. They open up a drawer with a folder, find the spot with your name, and see that something is already there, the old form that had your OLD address and needs to be updated. 
 
 ```
 "Sorry", you are told "there is already a form on file." The office manager the proceeds to light the form on fire and drop it in the trash. 
@@ -25,10 +25,9 @@ Let's do a thought experiment. You have a form to drop off at an office. You app
 "That would be the access your own data form." 
 ```
 
-By the time you understand the shenanigans and the form is finally filed, you are hoping you can just as quickly unlearn the ways of the beaurocratic craziness. This is the learning curve for modern databse development. The database assumes you know what it contains and will always execute the correct commands to sculpt the data how you want it via `INSERT`s, `UPDATE`s, `SELECT`s, `DELETE`s, and so on. CRUD can sometimes be pretty cruddy. 
+By the time you understand the shenanigans and the form is finally filed, you are hoping you can just as quickly unlearn the ways of the beaurocratic craziness. This, dear reader, is the learning curve for modern databse development. The database assumes you know what it contains, even if you put it there. It does exactly what you tell it to do, not always what you want it to do. CRUD can sometimes be pretty cruddy. 
 
 But, it doesn't have to be this way. What if it went like this:
-
 ```
 "Here is my form."
 
@@ -46,24 +45,25 @@ You back away slowly and leave before more questions arise.
 
 ```
 
-This unexpected miracle, is what it is like to use a MVDB. You `READ`, you `WRITE`, you `DELETE`, and you are DONE.
+This unexpected miracle, is what it is like to use a MVDB. You `READ`, you `WRITE`, maybe you `DELETE`, and you are DONE.
 
 ## WRITE me a river ...
 
-There are rough SQL equivalents in MVDB (TCL in my case), but they are for data retreival, not writing out data. To write it out, you have to use `PICK` code. For example: 
+There are rough equivalents to SQL for MVDBs ([TCL](https://www3.rocketsoftware.com/rocketd3/support/documentation/d3nt/91/refman/tcl/tcl_commands.htm) in my case), but they are for data retreival, not writing out data. To write it out, you have to use [`PICK`](https://en.wikipedia.org/wiki/Pick_operating_system) code. For example: 
 
 ```
 WRITE RECORD TO FILE,ID
 ```
-Pretty dang simple. Each `RECORD` in a `FILE` has a unique `ID`, and that is all there is to it. Plus the record is basically just a serialized array of binary data, so it's not even like we are talking column specific data types. If you need it back you just:
+Pretty dang simple. Each `RECORD` in a `FILE` has a unique `ID`, and that is all there is to it. Plus, the record is basically just a serialized array, so it's not even like we are talking columns or data types. If you need it back you just:
 
 ```
 READ RECORD FROM FILE,ID ELSE RECORD=''
 ```
 
-One of the precious few things I truly enjoy about PICK programming for MVDBs more than SQL DBs is the use of the `WRITE` command. Today we would call it `UPSERT`. It still troubles me that SQL systems can't take a page out of a very old book, and create a meaningfully simple syntax for an `UPSERT` command. 
+One of the precious few things I truly enjoy about PICK programming for MVDBs more than SQL DBs is beautiful simplicity in the use of the `WRITE` command. Today we call it `UPSERT`. It still troubles me that SQL systems can't take a page out of a very old book, and create a meaningfully simple syntax for an `UPSERT` command. 
 
-```"BUT WAIT!" the SQL nerd in you is screaming. "You can do an `UPSERT` in SQL. It is very well documented. Every SQL has some version of it, and If you have SQL Server just use `MERGE`, it's basically everywhere now and soooo easy:"```
+```"BUT WAIT!" the SQL nerd in you is screaming. "You CAN do an `UPSERT` in SQL! It is [very](https://www.mssqltips.com/sqlservertip/1704/using-merge-in-sql-server-to-insert-update-and-delete-at-the-same-time/) well documented. [Every SQL implementation has some version of it](https://blog.usejournal.com/update-insert-upsert-multiple-records-in-different-db-types-63aa44191884), and since you have MS SQL Server just use [`MERGE`](https://docs.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql?view=sql-server-ver15), it's basically everywhere now and soooo easy:"```
+
 ```
 MERGE <target_table> [AS TARGET]
 USING <table_source> [AS SOURCE]
@@ -85,7 +85,7 @@ The other thing that can be frustrating is that the syntax of these `UPSERT`s ar
 
 Look, you're not all together wrong. Yes, I can, but it doesn't seem like I should have to. I want all the complicated options for when I need them, but usually I don't need them. Sometimes you get the feeling that SQL was written for SQL developers, not the "normal people" like me. Forced complexity drives choices, which are taxing on the *developer*, and that complexity can spill over into other layers of the application stack. This is accepted that the developer has to make this choice over and over again. 
  
- - The HTTP does this with `POST` vs `PUT`. Do you want to make a new one, or update it? Don't know, well better do a `GET` to find out first, then tell me. Web frameworks accept the paradigmn and you often have to make different controllers/routes for different HTTP verbs that do ALMOST the same thing, and probably share most of the same code.
+ - The [HTTP](https://tools.ietf.org/html/rfc2616#section-9.5) does this with `POST` vs `PUT`. Do you want to make a new one, or update it? Don't know, well better do a `GET` to find out first, then tell me. Web frameworks accept the paradigmn and you often have to make different controllers/routes for different HTTP verbs that do ALMOST the same thing, and probably share most of the same code.
  
  - ORMs try to overcome this in variety of ways through even more complex code interactions, but ultimately require the developer to decide what to do in each case of an [`INSERT` or `UPDATE`.](https://stackoverflow.com/questions/41724658/how-to-do-a-proper-upsert-using-sqlalchemy-on-postgresql)
  
@@ -108,8 +108,10 @@ UPSERT INTO table(col1,col2,col3)
 VALUES(val1, val2, val3)
 ```
 
-The database knows what the primary keys are. It knows if there is not a primary key on the table, or if it is missing from the row being `UPSERT`ed. It can throw all the errors it needs to throw just like if any other normal constraints were unmet. If there are columns that have data and aren't in the new row, then they get nulled out. Or, you can add an additional keyword to indicate that it should just layer on the data in the `UPDATE` and leave what's there in place. I really am trying to have enough hubris to think I have solved a problem that people much smarter than me couldn't figure out.
+The database knows what the primary keys are. It knows if there is not a primary key on the table, or if it is missing from the row being `UPSERT`ed. It can throw all the errors it needs to throw just like if any other normal constraints were unmet. If there are columns that already have data and aren't in the new row, then they should get left in place. All of this is possible because, like in the antiquated Record/File system, there is necessarily a `UNIQUE` constraint on the table. If it doesn't have one, then it should throw an error. Is this really better? Meh... Maybe not. I enjoy this as an idea, but the cost is an increasingly asburd number of assumptions. 
 
-Nobody is asking me to design SQL standards, and that shows great wisdom on their part. I am a developer who uses SQL as a means to an end, not a DB engineer who thinks SQL is equal to any other Turing complete language. I am asking something new to be like something old. But, like I said, older here isn't better. If all you have is `READ`/`WRITE`/`DELETE` then your world is very small. You can only build so high if you only have 3 tools, and which is why it is on it's way out. SQL is what it needs to be, and I am the one who will conform to it. 
+I am especially picking on MSSQL here, but I think [Postgres is similar](https://wiki.postgresql.org/wiki/UPSERT). Some good news is that MySQL has an implementation that almost hits this mark using [`REPLACE INTO`](https://dev.mysql.com/doc/refman/8.0/en/replace.html), [but internally does a DELETE which can be very costly, plus you lose data in non-primary key columns you didn't `UPDATE`](http://code.openark.org/blog/mysql/replace-into-think-twice). SQLite has [`INSERT OR REPLACE`](https://stackoverflow.com/questions/418898/sqlite-upsert-not-insert-or-replace?rq=1), which is maybe syntactically better but still has struggles with ambiguity, so now has `INSERT.. ON CONFLICT`. It all comes back to how much ambiguity is tolerable, and if you need to write an `ELSE` statement to resolve it, just write the `ELSE` statement. 
+
+Nobody is asking me to design SQL standards, and that shows great wisdom on their part. I am a developer who uses SQL as a means to an end, not a DB engineer who thinks SQL is equal to any other Turing complete language. I am asking something new to be like something old. But, like I said, older here isn't better. If all you have is `READ`/`WRITE`/`DELETE` then your world is very small. You can only build so high if you only have 3 tools, and this is why it is on it's way out. SQL is what it needs to be, and I am the one who will conform to it. Giving up simplicity means I, like every other developer, have to be of two minds when it comes to data modeling, and accept the complexity that comes with it.
 
 
